@@ -1,0 +1,120 @@
+### Oxide Bot Monitor API Testing (.http)
+@baseUrl = http://localhost:5000/api
+@simulatorUrl = http://localhost:8788
+
+### 1. Healthcheck
+GET http://localhost:5000/health
+Content-Type: application/json
+
+### 2. Get All Bots (with metrics and task states)
+GET {{baseUrl}}/bots
+Content-Type: application/json
+
+### 3. Get Bot Details by ID (bot-01, bot-02, bot-03, etc.)
+GET {{baseUrl}}/bots/bot-02
+Content-Type: application/json
+
+### 4. Send Command to Bot (start / stop / restart / status)
+POST {{baseUrl}}/bots/bot-02/commands
+Content-Type: application/json
+
+{
+  "command": "stop"
+}
+
+### 5. Send Start Command to Bot
+POST {{baseUrl}}/bots/bot-02/commands
+Content-Type: application/json
+
+{
+  "command": "start"
+}
+
+### 6. Get Overview Summary Metrics (Online, Active, Standby, In Progress)
+GET {{baseUrl}}/summary
+Content-Type: application/json
+
+### 7. Get Kill-Switch State
+GET {{baseUrl}}/kill-switch
+Content-Type: application/json
+
+### 8. Enable Kill-Switch (Halt all bot order operations)
+POST {{baseUrl}}/kill-switch
+Content-Type: application/json
+
+{
+  "enable": false
+}
+
+### 9. Disable Kill-Switch (Resume normal bot operations)
+POST {{baseUrl}}/kill-switch
+Content-Type: application/json
+
+{
+  "enable": true
+}
+
+### 10. List Code Deployment Packages
+GET {{baseUrl}}/packages
+Content-Type: application/json
+
+### 11. Pack New Code Package Version
+POST {{baseUrl}}/packages/pack
+Content-Type: application/json
+
+{}
+
+### 12. Deploy Package to All Online Bots
+POST {{baseUrl}}/packages/deploy
+Content-Type: application/json
+
+{
+  "packageId": "pkg-01"
+}
+
+### 13. Deploy Package to a Specific Bot
+POST {{baseUrl}}/packages/deploy
+Content-Type: application/json
+
+{
+  "packageId": "pkg-01",
+  "targetBotId": "bot-03"
+}
+
+### 14. List Orders
+GET {{baseUrl}}/orders
+Content-Type: application/json
+
+### 15. Create New Order (Pending)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "externalOrderId": "ORD-TEST-9901",
+  "amount": 350.00,
+  "currency": "THB"
+}
+
+### 16. Dispatch Order to Bot (SKIP LOCKED Concurrency Safe)
+POST {{baseUrl}}/orders/dispatch
+Content-Type: application/json
+
+{
+  "botId": "bot-02"
+}
+
+### 17. Mark Order Completed
+POST {{baseUrl}}/orders/1/complete
+Content-Type: application/json
+
+### 18. Audit Logs
+GET {{baseUrl}}/audit-logs
+Content-Type: application/json
+
+### 19. Simulator Health (Port 8788)
+GET {{simulatorUrl}}/health
+Content-Type: application/json
+
+### 20. Simulator Bots (Port 8788)
+GET {{simulatorUrl}}/bots
+Content-Type: application/json

@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "oxide-bot-monitor-collection",
+    "name": "Oxide Bot Monitor & Order Tracking API",
+    "description": "Postman Collection for Technical Assessment: Centralized Bot Monitoring & Control Center",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Healthcheck",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Bots - Get All Agents",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/bots",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "bots"]
+        }
+      }
+    },
+    {
+      "name": "Bots - Get Details by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/bots/bot-02",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "bots", "bot-02"]
+        }
+      }
+    },
+    {
+      "name": "Bots - Send Command (stop/start/restart)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"command\": \"stop\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/bots/bot-02/commands",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "bots", "bot-02", "commands"]
+        }
+      }
+    },
+    {
+      "name": "Summary - Overview Metrics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/summary",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "summary"]
+        }
+      }
+    },
+    {
+      "name": "Kill Switch - Get Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/kill-switch",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "kill-switch"]
+        }
+      }
+    },
+    {
+      "name": "Kill Switch - Toggle System State",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"enable\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/kill-switch",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "kill-switch"]
+        }
+      }
+    },
+    {
+      "name": "Deployment - List Packages",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/packages",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "packages"]
+        }
+      }
+    },
+    {
+      "name": "Deployment - Deploy to All Bots",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"packageId\": \"pkg-01\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/packages/deploy",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "packages", "deploy"]
+        }
+      }
+    },
+    {
+      "name": "Orders - List Orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "orders"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Create Pending Order",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"externalOrderId\": \"ORD-TEST-8801\",\n  \"amount\": 450,\n  \"currency\": \"THB\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "orders"]
+        }
+      }
+    },
+    {
+      "name": "Orders - Dispatch Next (SKIP LOCKED)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"botId\": \"bot-02\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/orders/dispatch",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "orders", "dispatch"]
+        }
+      }
+    },
+    {
+      "name": "Audit Logs - List Activity Trail",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/audit-logs",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "audit-logs"]
+        }
+      }
+    }
+  ]
+}
